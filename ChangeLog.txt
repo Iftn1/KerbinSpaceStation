@@ -1,5 +1,11 @@
 ChangeLog
 
+1.7.3.3
+	Thanks to github user @zhangyuesai for these fixes:
+		StationCoreCombined.cfg, ReplaceFaultyModule.cfg and BaseCreate.cfg all have power module validation. But the titles are slightly different among contracts, and even in the same contracts. This PR makes them consistent.
+		In BaseCreate.cfg, hideChildren is changed to false to show power module requirement explicitly, making it consistent with the other two contracts.
+		Adds KopernicusSolarPanel validation to ReplaceFaultyModule.cfg and BaseCreate.cfg, so the two contracts are available when Kopernicus is installed.
+Fixes some typos.
 3.7.3.2
 	Thanks to github user @zhangyuesai for this:
 		Fix SSPXr compatibility
