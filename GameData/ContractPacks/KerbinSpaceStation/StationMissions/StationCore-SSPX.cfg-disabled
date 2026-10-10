@@ -10,14 +10,29 @@
 }
 CONTRACT_TYPE:NEEDS[StationPartsExpansionRedux]
 {
+
+	DATA
+	{
+		type = string
+		hidden = true
+
+		loc_KSS_StationCoreSSPX_title_s1 = #loc_KSS_StationCoreSSPX_title_s1
+		loc_KSS_StationCoreSSPX_title_s2 = #loc_KSS_StationCoreSSPX_title_s2
+		loc_KSS_shared_In_order_to_aid_our_efforts_of_exploring = #loc_KSS_shared_In_order_to_aid_our_efforts_of_exploring
+		loc_KSS_shared_we_d_like_you_to_launch_a_space_station = #loc_KSS_shared_we_d_like_you_to_launch_a_space_station
+		loc_KSS_StationCoreSSPX_synopsis_s1 = #loc_KSS_StationCoreSSPX_synopsis_s1
+		loc_KSS_shared_Space_Station = #loc_KSS_shared_Space_Station
+		loc_KSS_shared_Launch_a_new_Station_Core_into_the_specified_orb = #loc_KSS_shared_Launch_a_new_Station_Core_into_the_specified_orb
+	}
+
     name = StationCoreSSPX
     group = BasesandStations
-    title = Launch the @/targetBody1 Space Station! (SSPX)
-	genericTitle = Launch a New Space Station
-    description = In order to aid our efforts of exploring @/targetBody1 we'd like you to launch a space station.
-	genericDescription = We'd like you to deploy a new space station.
-    synopsis = Launch the @/targetBody1 Space Station!
-    completedMessage = Station Complete!
+    title = @/loc_KSS_StationCoreSSPX_title_s1 + @/targetBody1 + @/loc_KSS_StationCoreSSPX_title_s2
+	genericTitle = #loc_KSS_shared_Launch_a_New_Space_Station
+    description = @/loc_KSS_shared_In_order_to_aid_our_efforts_of_exploring + @/targetBody1 + @/loc_KSS_shared_we_d_like_you_to_launch_a_space_station
+	genericDescription = #loc_KSS_shared_We_d_like_you_to_deploy_a_new_space_station
+    synopsis = @/loc_KSS_StationCoreSSPX_synopsis_s1 + @/targetBody1 + @/loc_KSS_shared_Space_Station
+    completedMessage = #loc_KSS_shared_Station_Complete
     
 	// Contract min/max expiry in days.
     minExpiry = 1
@@ -51,7 +66,7 @@ CONTRACT_TYPE:NEEDS[StationPartsExpansionRedux]
         uniquenessCheck = GROUP_ACTIVE
         targetBody1 = OrbitedBodies().Where(body => @/stations.Where(v => v.CelestialBody() == body).Count() == 0).SelectUnique()
 		//targetBody1 = Kerbin
-		title = Must have orbited a Celestial Body, but not have any stations deployed.
+		title = #loc_KSS_StationCoreSSPX_DATA2_title
     }
 
 
@@ -60,8 +75,8 @@ CONTRACT_TYPE:NEEDS[StationPartsExpansionRedux]
     {
         name = NewStation
         type = VesselParameterGroup
-        title = Launch a new Station Core into the specified orbit around @/targetBody1.
-        notes = The station must include 1 Docking Port and support 4 Kerbals.  This can be done in one launch, or multiple launches.
+        title = @/loc_KSS_shared_Launch_a_new_Station_Core_into_the_specified_orb + @/targetBody1.
+        notes = #loc_KSS_StationCoreSSPX_PARAMETER1_notes
 
 		//Checks station is in orbit
 		PARAMETER
@@ -89,7 +104,7 @@ CONTRACT_TYPE:NEEDS[StationPartsExpansionRedux]
         {
             name = HabModuleChild
             type = HasCrewCapacity
-			title = Support 4 Kerbals
+			title = #loc_KSS_shared_Support_4_Kerbals
             
 			minCapacity = 4
             
@@ -100,13 +115,13 @@ CONTRACT_TYPE:NEEDS[StationPartsExpansionRedux]
         {
             name = RTGSolar
             type = Any
-            title = Have one of the following power generators
+            title = #loc_KSS_shared_Have_one_of_the_following_power_generators
 
             PARAMETER
             {
                 name = PartValidationRTG
                 type = PartValidation
-				title = 1 or more solar panels
+				title = #loc_KSS_shared_1_or_more_solar_panels
 				hideChildren = true
 
                 partModule = ModuleDeployableSolarPanel
@@ -117,7 +132,7 @@ CONTRACT_TYPE:NEEDS[StationPartsExpansionRedux]
             {
                 name = PartValidationSolar
                 type = PartValidation
-                title = 1 or more generators
+                title = #loc_KSS_shared_1_or_more_generators
 				hideChildren = true
                 
                 partModule = ModuleGenerator
@@ -128,7 +143,7 @@ CONTRACT_TYPE:NEEDS[StationPartsExpansionRedux]
 			{
 				name = PartValidationNearFutureSolar
 				type = PartValidation
-				title = 1 or more curved solar panels
+				title = #loc_KSS_shared_1_or_more_curved_solar_panels
 				hideChildren = true
 				
 				partModule = ModuleCurvedSolarPanel
@@ -139,7 +154,7 @@ CONTRACT_TYPE:NEEDS[StationPartsExpansionRedux]
 			{
 				name = PartValidationNearFutureReactors
 				type = PartValidation
-				title = 1 or more fission reactors
+				title = #loc_KSS_shared_1_or_more_fission_reactors
 				hideChildren = true
 				partModule = FissionReactor
 				minCount = 1
@@ -149,7 +164,7 @@ CONTRACT_TYPE:NEEDS[StationPartsExpansionRedux]
 			{
 				name = PartValidationNearFutureRTGs
 				type = PartValidation
-				title = 1 or more radioisotope generators
+				title = #loc_KSS_shared_1_or_more_radioisotope_generators
 				hideChildren = true
 				partModule = ModuleRadioisotopeGenerator
 				minCount = 1
@@ -160,7 +175,7 @@ CONTRACT_TYPE:NEEDS[StationPartsExpansionRedux]
 				name = PartValidationRTG
                 type = PartValidation
                 hideChildren = true
-                title = 1 or more solar panels
+                title = #loc_KSS_shared_1_or_more_solar_panels
                 partModule = KopernicusSolarPanel
                 minCount = 1
 			}
@@ -172,7 +187,7 @@ CONTRACT_TYPE:NEEDS[StationPartsExpansionRedux]
 			name = StationCoreAndHabValidation
 			type = Any
 			optional = false
-            title = Have any of the station cores and a corresponding habitat
+            title = #loc_KSS_StationCoreSSPX_PARAMETER1_PARAMETER1_title_3
 
             PARAMETER
             {
@@ -183,7 +198,7 @@ CONTRACT_TYPE:NEEDS[StationPartsExpansionRedux]
                 {
                     name = PartValidationStationCore125
                     type = PartValidation
-				    title = Include a 1.25m station core
+				    title = #loc_KSS_StationCoreSSPX_PARAMETER1_PARAMETER1_PARAMETER1_PARAMETER1_title
 				    hideChildren = true
 			
 				    part = sspx-core-125-1	
@@ -194,7 +209,7 @@ CONTRACT_TYPE:NEEDS[StationPartsExpansionRedux]
 			    {
 				    name = PartValidationHab125
 				    type = PartValidation
-				    title = Include a 1.25m habitat module
+				    title = #loc_KSS_StationCoreSSPX_PARAMETER1_PARAMETER1_PARAMETER1_PARAMETER2_title_2
 				    hideChildren = true
 				
 				    part = sspx-habitation-125-1		
@@ -217,7 +232,7 @@ CONTRACT_TYPE:NEEDS[StationPartsExpansionRedux]
                 {
                     name = PartValidationStationCore1875
                     type = PartValidation
-				    title = Include a 1.875m station core
+				    title = #loc_KSS_StationCoreSSPX_PARAMETER1_PARAMETER1_PARAMETER2_PARAMETER1_title
 				    hideChildren = true
 			
 				    part = sspx-core-1875-1				
@@ -228,7 +243,7 @@ CONTRACT_TYPE:NEEDS[StationPartsExpansionRedux]
 			    {
 				    name = PartValidationHab1875
 				    type = PartValidation
-				    title = Include a 1.875m habitat module
+				    title = #loc_KSS_StationCoreSSPX_PARAMETER1_PARAMETER1_PARAMETER2_PARAMETER2_title_2
 				    hideChildren = true
 				
 				    part = sspx-habitation-1875-1
@@ -247,7 +262,7 @@ CONTRACT_TYPE:NEEDS[StationPartsExpansionRedux]
                 {
                     name = PartValidationStationCore25
                     type = PartValidation
-				    title = Include a 2.5m station core
+				    title = #loc_KSS_StationCoreSSPX_PARAMETER1_PARAMETER1_PARAMETER3_PARAMETER1_title
 				    hideChildren = true
 			
 				    part = sspx-core-25-1
@@ -259,7 +274,7 @@ CONTRACT_TYPE:NEEDS[StationPartsExpansionRedux]
 			    {
 				    name = PartValidationHab25
 				    type = PartValidation
-				    title = Include a 2.5m habitat module
+				    title = #loc_KSS_StationCoreSSPX_PARAMETER1_PARAMETER1_PARAMETER3_PARAMETER2_title_2
 				    hideChildren = true
 
 				    part = sspx-habitation-25-1
@@ -281,7 +296,7 @@ CONTRACT_TYPE:NEEDS[StationPartsExpansionRedux]
                 {
                     name = PartValidationStationCore375
                     type = PartValidation
-				    title = Include a 3.75m station core
+				    title = #loc_KSS_StationCoreSSPX_PARAMETER1_PARAMETER1_PARAMETER4_PARAMETER1_title
 				    hideChildren = true
 
 				    part = sspx-core-375-1
@@ -293,7 +308,7 @@ CONTRACT_TYPE:NEEDS[StationPartsExpansionRedux]
 			    {
 				    name = PartValidationHab375
 				    type = PartValidation
-				    title = Include a habitat module
+				    title = #loc_KSS_shared_Include_a_habitat_module
 				    hideChildren = true
 				
 				    part = sspx-habitation-375-1
@@ -315,7 +330,7 @@ CONTRACT_TYPE:NEEDS[StationPartsExpansionRedux]
                 {
                     name = PartValidationStationCore5
                     type = PartValidation
-				    title = Include a station core
+				    title = #loc_KSS_StationCoreSSPX_PARAMETER1_PARAMETER1_PARAMETER5_PARAMETER1_title
 				    hideChildren = true
 			
 				    part = sspx-core-5-1
@@ -327,7 +342,7 @@ CONTRACT_TYPE:NEEDS[StationPartsExpansionRedux]
 			    {
 				    name = PartValidationHab5
 				    type = PartValidation
-				    title = Include a habitat module
+				    title = #loc_KSS_shared_Include_a_habitat_module
 				    hideChildren = true
 				
 				    part = sspx-habitation-5-1
@@ -344,7 +359,7 @@ CONTRACT_TYPE:NEEDS[StationPartsExpansionRedux]
         {
             name = PartValidation
             type = PartValidation
-            title = Include a cupola (not optional)
+            title = #loc_KSS_shared_Include_a_cupola_not_optional
 			optional = true
 			hideChildren = true
             
@@ -365,7 +380,7 @@ CONTRACT_TYPE:NEEDS[StationPartsExpansionRedux]
 		{
 			name = Supplies
 			type = HasResource
-			title = Have Supplies on board your vessel
+			title = #loc_KSS_shared_Have_Supplies_on_board_your_vessel
 			
 			resource = Supplies
 			minQuantity = 1
@@ -383,7 +398,7 @@ CONTRACT_TYPE:NEEDS[StationPartsExpansionRedux]
 			{
 				name = ScienceLab
 				type = PartValidation
-				title = Include a Mobile Processing Lab MPL-LG-2
+				title = #loc_KSS_shared_Include_a_Mobile_Processing_Lab_MPL_LG_2
 				rewardFunds = 75000.0
 				hideChildren = true
 				
@@ -394,7 +409,7 @@ CONTRACT_TYPE:NEEDS[StationPartsExpansionRedux]
 			{
 				name = PartValidation
 				type = PartValidation
-				title = Include a TH-NKR Research Lab
+				title = #loc_KSS_shared_Include_a_TH_NKR_Research_Lab
 				rewardFunds = 85000.0
 				hideChildren = true
 				
@@ -405,7 +420,7 @@ CONTRACT_TYPE:NEEDS[StationPartsExpansionRedux]
 			{
 				name = PartValidation
 				type = PartValidation
-				title = Include a Science Laboratory
+				title = #loc_KSS_shared_Include_a_Science_Laboratory
 				rewardFunds = 75000.0
 				hideChildren = true
 
@@ -429,9 +444,9 @@ CONTRACT_TYPE:NEEDS[StationPartsExpansionRedux]
 		name = Duration
 		type = Duration
 		duration = 2d
-		preWaitText = Orbit time required:
-		waitingText = Time to completion: 
-		completionText = You survived!
+		preWaitText = #loc_KSS_shared_Orbit_time_required
+		waitingText = #loc_KSS_shared_Time_to_completion
+		completionText = #loc_KSS_shared_You_survived
 		startCriteria = PARAMETER_COMPLETION
 		parameter = NewStation
 	}
@@ -499,7 +514,7 @@ CONTRACT_TYPE:NEEDS[StationPartsExpansionRedux]
 		name = SunCheck
 		type = Expression
 		expression = !@/targetBody1.IsSun()
-		title = Target body must not be the Sun
+		title = #loc_KSS_shared_Target_body_must_not_be_the_Sun
 	}
 }
 	

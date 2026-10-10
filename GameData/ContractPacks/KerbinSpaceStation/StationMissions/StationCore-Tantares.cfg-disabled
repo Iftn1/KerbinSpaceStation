@@ -10,14 +10,28 @@
 }
 CONTRACT_TYPE:NEEDS[Tantares]
 {
+
+	DATA
+	{
+		type = string
+		hidden = true
+
+		loc_KSS_StationCoreTantares_title_s1 = #loc_KSS_StationCoreTantares_title_s1
+		loc_KSS_shared_Space_Station = #loc_KSS_shared_Space_Station
+		loc_KSS_shared_In_order_to_aid_our_efforts_of_exploring = #loc_KSS_shared_In_order_to_aid_our_efforts_of_exploring
+		loc_KSS_shared_we_d_like_you_to_launch_a_space_station = #loc_KSS_shared_we_d_like_you_to_launch_a_space_station
+		loc_KSS_StationCoreTantares_synopsis_s1 = #loc_KSS_StationCoreTantares_synopsis_s1
+		loc_KSS_shared_Launch_a_new_Station_Core_into_the_specified_orb = #loc_KSS_shared_Launch_a_new_Station_Core_into_the_specified_orb
+	}
+
     name = StationCoreTantares
     group = BasesandStations
-    title = Launch the @/targetBody1 Space Station!
-	genericTitle = Launch a New Space Station
-    description = In order to aid our efforts of exploring @/targetBody1 we'd like you to launch a space station.
-	genericDescription = We'd like you to deploy a new space station.
-    synopsis = Launch the @/targetBody1 Space Station!
-    completedMessage = Station Complete!
+    title = @/loc_KSS_StationCoreTantares_title_s1 + @/targetBody1 + @/loc_KSS_shared_Space_Station
+	genericTitle = #loc_KSS_shared_Launch_a_New_Space_Station
+    description = @/loc_KSS_shared_In_order_to_aid_our_efforts_of_exploring + @/targetBody1 + @/loc_KSS_shared_we_d_like_you_to_launch_a_space_station
+	genericDescription = #loc_KSS_shared_We_d_like_you_to_deploy_a_new_space_station
+    synopsis = @/loc_KSS_StationCoreTantares_synopsis_s1 + @/targetBody1 + @/loc_KSS_shared_Space_Station
+    completedMessage = #loc_KSS_shared_Station_Complete
     
 	// Contract min/max expiry in days.
     minExpiry = 1
@@ -51,7 +65,7 @@ CONTRACT_TYPE:NEEDS[Tantares]
         uniquenessCheck = GROUP_ACTIVE
         targetBody1 = OrbitedBodies().Where(body => @/stations.Where(v => v.CelestialBody() == body).Count() == 0).SelectUnique()
 		//targetBody1 = Kerbin
-		title = Must have orbited a Celestial Body, but not have any stations deployed.
+		title = #loc_KSS_StationCoreTantares_DATA2_title
     }
 
 
@@ -60,8 +74,8 @@ CONTRACT_TYPE:NEEDS[Tantares]
     {
         name = NewStation
         type = VesselParameterGroup
-        title = Launch a new Station Core into the specified orbit around @/targetBody1.
-        notes = The station must include 1 Docking Port and support 4 Kerbals.  This can be done in one launch, or multiple launches.
+        title = @/loc_KSS_shared_Launch_a_new_Station_Core_into_the_specified_orb + @/targetBody1.
+        notes = #loc_KSS_StationCoreTantares_PARAMETER1_notes
 
 		//Checks station is in orbit
 		PARAMETER
@@ -89,7 +103,7 @@ CONTRACT_TYPE:NEEDS[Tantares]
         {
             name = HabModuleChild
             type = HasCrewCapacity
-			title = Support 4 Kerbals
+			title = #loc_KSS_shared_Support_4_Kerbals
             
 			minCapacity = 4
             
@@ -100,13 +114,13 @@ CONTRACT_TYPE:NEEDS[Tantares]
         {
             name = RTGSolar
             type = Any
-            title = Have one of the following power generators
+            title = #loc_KSS_shared_Have_one_of_the_following_power_generators
 
             PARAMETER
             {
                 name = PartValidationRTG
                 type = PartValidation
-				title = 1 or more solar panels
+				title = #loc_KSS_shared_1_or_more_solar_panels
 				hideChildren = true
 
                 partModule = ModuleDeployableSolarPanel
@@ -117,7 +131,7 @@ CONTRACT_TYPE:NEEDS[Tantares]
             {
                 name = PartValidationSolar
                 type = PartValidation
-                title = 1 or more generators
+                title = #loc_KSS_shared_1_or_more_generators
 				hideChildren = true
                 
                 partModule = ModuleGenerator
@@ -128,7 +142,7 @@ CONTRACT_TYPE:NEEDS[Tantares]
 			{
 				name = PartValidationNearFutureSolar
 				type = PartValidation
-				title = 1 or more curved solar panels
+				title = #loc_KSS_shared_1_or_more_curved_solar_panels
 				hideChildren = true
 				
 				partModule = ModuleCurvedSolarPanel
@@ -139,7 +153,7 @@ CONTRACT_TYPE:NEEDS[Tantares]
 			{
 				name = PartValidationNearFutureReactors
 				type = PartValidation
-				title = 1 or more fission reactors
+				title = #loc_KSS_shared_1_or_more_fission_reactors
 				hideChildren = true
 				partModule = FissionReactor
 				minCount = 1
@@ -149,7 +163,7 @@ CONTRACT_TYPE:NEEDS[Tantares]
 			{
 				name = PartValidationNearFutureRTGs
 				type = PartValidation
-				title = 1 or more radioisotope generators
+				title = #loc_KSS_shared_1_or_more_radioisotope_generators
 				hideChildren = true
 				partModule = ModuleRadioisotopeGenerator
 				minCount = 1
@@ -160,7 +174,7 @@ CONTRACT_TYPE:NEEDS[Tantares]
 				name = PartValidationRTG
                 type = PartValidation
                 hideChildren = true
-                title = 1 or more solar panels
+                title = #loc_KSS_shared_1_or_more_solar_panels
                 partModule = KopernicusSolarPanel
                 minCount = 1
 			}
@@ -170,7 +184,7 @@ CONTRACT_TYPE:NEEDS[Tantares]
         {
             name = PartValidation
             type = PartValidation
-            title = Include a cupola (optional)
+            title = #loc_KSS_shared_Include_a_cupola_optional
 			optional = true
 			hideChildren = true
             
@@ -194,7 +208,7 @@ CONTRACT_TYPE:NEEDS[Tantares]
 		{
 			name = Supplies
 			type = HasResource
-			title = Have Supplies on board your vessel
+			title = #loc_KSS_shared_Have_Supplies_on_board_your_vessel
 			
 			resource = Supplies
 			minQuantity = 1
@@ -212,7 +226,7 @@ CONTRACT_TYPE:NEEDS[Tantares]
 			{
 				name = ScienceLab
 				type = PartValidation
-				title = Include a Mobile Processing Lab MPL-LG-2
+				title = #loc_KSS_shared_Include_a_Mobile_Processing_Lab_MPL_LG_2
 				rewardFunds = 75000.0
 				hideChildren = true
 				
@@ -223,7 +237,7 @@ CONTRACT_TYPE:NEEDS[Tantares]
 			{
 				name = PartValidation
 				type = PartValidation
-				title = Include a TH-NKR Research Lab
+				title = #loc_KSS_shared_Include_a_TH_NKR_Research_Lab
 				rewardFunds = 85000.0
 				hideChildren = true
 				
@@ -234,7 +248,7 @@ CONTRACT_TYPE:NEEDS[Tantares]
 			{
 				name = PartValidation
 				type = PartValidation
-				title = Include a Science Laboratory
+				title = #loc_KSS_shared_Include_a_Science_Laboratory
 				rewardFunds = 75000.0
 				hideChildren = true
 
@@ -258,9 +272,9 @@ CONTRACT_TYPE:NEEDS[Tantares]
 		name = Duration
 		type = Duration
 		duration = 2d
-		preWaitText = Orbit time required:
-		waitingText = Time to completion: 
-		completionText = You survived!
+		preWaitText = #loc_KSS_shared_Orbit_time_required
+		waitingText = #loc_KSS_shared_Time_to_completion
+		completionText = #loc_KSS_shared_You_survived
 		startCriteria = PARAMETER_COMPLETION
 		parameter = NewStation
 	}
@@ -328,7 +342,7 @@ CONTRACT_TYPE:NEEDS[Tantares]
 		name = SunCheck
 		type = Expression
 		expression = !@/targetBody1.IsSun()
-		title = Target body must not be the Sun
+		title = #loc_KSS_shared_Target_body_must_not_be_the_Sun
 	}
 }
 	
